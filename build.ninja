@@ -1,0 +1,19 @@
+
+root = .
+builddir = build
+
+toolchain = D$:\application\Program$ Files$ (x86)\LLVM
+
+cxx = $toolchain\bin\clang.exe
+
+cxxflags = $
+    -std=c++17 -O2 -Werror -Wall $
+    -Wno-format-security $
+    -D_CRT_SECURE_NO_WARNINGS -D__WINDOWS_OS__
+
+rule obj_build_cxx
+    command = $cxx $in -o $out $cxxflags
+    description = Building $out
+
+build $builddir\main.exe : obj_build_cxx $root\main.cpp
+default $builddir\main.exe
